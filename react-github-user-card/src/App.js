@@ -6,6 +6,7 @@ import GhCard from './components/GhCard';
 class App extends Component {
   constructor() {
     super();
+  // console.log('constructor');
 
     this.state = {
       user: {},
@@ -14,6 +15,7 @@ class App extends Component {
   }
 
 componentDidMount() {
+ // console.log('DidMount');
   Axios.get('https://api.github.com/users/jasynmarais')
     .then(res => {
       this.setState({ user: res.data });
@@ -31,6 +33,7 @@ componentDidMount() {
 }
 
 render() {
+ // console.log('render');
   return (
     <div>
       <h1>My React Github User Card!</h1>
