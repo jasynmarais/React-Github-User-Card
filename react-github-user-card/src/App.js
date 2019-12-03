@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import Axios from 'axios';
-import GhData from './components/GhData.js';
+import GhCard from './components/GhCard';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      user: []
+      user: {},
+      followers: []
     };
   }
 
@@ -20,13 +21,20 @@ componentDidMount() {
     .catch(err => {
       console.log(err);
     });
+  Axios.get('https://api.github.com/users/jasynmarais/followers')
+    .then(res => {
+      this.setState({ followers: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 render() {
   return (
     <div>
-      <h1>Wassup!</h1>
-      <GhData userData={this.state.user} />
+      <h1>My React Github User Card!</h1>
+      <GhCard user={this.state.user} followers={this.state.followers} />
     </div>
     );
   }
